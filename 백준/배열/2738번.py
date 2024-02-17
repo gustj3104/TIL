@@ -12,5 +12,6 @@ for i in range(N):
     for x in range(M):
         c[i][x] = a[i][x]+b[i][x]
         print(c[i][x], end=" ")
+    print()
 
 

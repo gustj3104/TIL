@@ -4,5 +4,3 @@ word=list(input().split())
 for i in range(len(word)):
     word[i]=word[i].swapcase()
     print(word[i])
-
-
