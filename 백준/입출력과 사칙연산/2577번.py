@@ -2,7 +2,10 @@
 a=int(input())
 b=int(input())
 c=int(input())
-
+cnt=[]
 d=a*b*c
 d_list=list(str(d))
-print(d_list)
+for i in range(0,10):
+    cnt.append(d_list.count(str(i)))
+for i in range(len(cnt)):
+    print(cnt[i])

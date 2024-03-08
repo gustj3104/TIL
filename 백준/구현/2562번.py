@@ -7,4 +7,4 @@ c=max(a)
 for i in range(len(a)):
     if a[i]==c:
         print(c)
-        print(i)
+        print(i+1)
