@@ -16,8 +16,8 @@ from bisect import bisect_left
 
 def binary_search(array, target):
     index=bisect_left(array, target) #탐색 위치 저장
-    if index < len(array) and array[index] == target:
-        return 1
+    if index < len(array) and array[index] == target: #인덱스가 탐색하려는 리스트의 길이보다 작으면서, target과 동일할 때 1 return 
+        return 1 # return이 끝나면 함수가 종료되기 때문에 else 필요없이 return 1 // return 0 하면 됨.
     return 0
 
 n=int(sys.stdin.readline())
