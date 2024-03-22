@@ -20,6 +20,7 @@ public class Casting4 {
         System.out.println("result = " + result); //1.5
     }
 }
+
 /*
 - 같은 타입끼리의 계산은 같은 타입의 결과를 낸다.
 - 서로 다른 타입의 계산은 큰 범위로 자동 형변환이 일어난다.
