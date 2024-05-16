@@ -46,26 +46,26 @@
 
 import sys
 
-# def stack_sort(in_list): # in_list: 입력으로 받은 숫자를 저장하는 리스트
-#     stack = [] # 주어진 리스트를 정렬하기 위한 리스트
-#     result=[] # +, -를 저장하기 위한 리스트
-#     current=1 # 스택에 삽입될 변수 (초기값: 1 --> 1씩 증가함)
+def stack_sort(in_list): # in_list: 입력으로 받은 숫자를 저장하는 리스트
+    stack = [] # 주어진 리스트를 정렬하기 위한 리스트
+    result=[] # +, -를 저장하기 위한 리스트
+    current=1 # 스택에 삽입될 변수 (초기값: 1 --> 1씩 증가함)
 
-#     for num in in_list:
-#         while current <= num: #in_list의 최고값보다 current가 작을 때 수행함.
-#             stack.append(current) #스택에 리스트값 저장 (1부터 리스트의 최고값까지 정렬)
-#             result.append("+") #스택에 수를 추가할 때마다 리스트에 + 추가
-#             current+=1 #스택에 저장할 값 1씩 증가
-#         if stack[-1] == num: # 스택 리스트의 마지막 값이 입력받은 리스트의 값과 같을 때 (정렬 리스트 요소 == 입력 리스트 요소)
-#             stack.pop() # 스택의 가장 최근 입력값 삭제
-#             result.append("-") 
-#         else:
-#             return "NO"
-#     return "\n".join(result) #join은 요소의 문자열을 하나의 문자열로 결합함. 
+    for num in in_list:
+        while current <= num: #in_list의 최고값보다 current가 작을 때 수행함.
+            stack.append(current) #스택에 리스트값 저장 (1부터 리스트의 최고값까지 정렬)
+            result.append("+") #스택에 수를 추가할 때마다 리스트에 + 추가
+            current+=1 #스택에 저장할 값 1씩 증가
+        if stack[-1] == num: # 스택 리스트의 마지막 값이 입력받은 리스트의 값과 같을 때 (정렬 리스트 요소 == 입력 리스트 요소)
+            stack.pop() # 스택의 가장 최근 입력값 삭제
+            result.append("-") 
+        else:
+            return "NO"
+    return "\n".join(result) #join은 요소의 문자열을 하나의 문자열로 결합함. 
 
-# n=int(sys.stdin.readline()) 
-# in_list=[int(sys.stdin.readline()) for _ in range(n)]
-# print(stack_sort(in_list)) #정의한 함수 출력
+n=int(sys.stdin.readline()) 
+in_list=[int(sys.stdin.readline()) for _ in range(n)]
+print(stack_sort(in_list)) #정의한 함수 출력
 
 
 def stack_sort(in_list):

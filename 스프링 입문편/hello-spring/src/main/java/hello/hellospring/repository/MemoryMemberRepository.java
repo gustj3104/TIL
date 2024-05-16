@@ -38,3 +38,8 @@ public class MemoryMemberRepository implements MemberRepository{
         store.clear();
     }
 }
+
+/*
+save: 멤버를 받아서
+?sequence?
+ */

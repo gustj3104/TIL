@@ -61,3 +61,7 @@ for _ in range(t):
         m = m - 1 if m > 0 else len(data) - 1 #m이 0보다 크면 1감소, 아니면 길이 - 1
 
     print(result)
+#m은 탐색 인덱스의 위치를 추적함.
+    
+
+
