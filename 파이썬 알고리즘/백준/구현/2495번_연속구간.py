@@ -18,7 +18,7 @@ def inspect_list(s):
     else:
         print(max(count) + 1)  
 
-# 테스트 실행
+# 메인
 for _ in range(3):
     s = list(map(int, str(input())))
     inspect_list(s)
