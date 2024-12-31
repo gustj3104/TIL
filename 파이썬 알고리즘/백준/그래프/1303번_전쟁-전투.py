@@ -37,8 +37,9 @@ def count():
 
     print(white_count, black_count)
     return white_count, black_count
+
 # 메인
-n, m = map(int, input().split()) # n: 가로 m: 세로로
+n, m = map(int, input().split()) # n: 가로 m: 세로
 for _ in range(m):
     s = list(input())
     s.pop() #개행문자 제거
