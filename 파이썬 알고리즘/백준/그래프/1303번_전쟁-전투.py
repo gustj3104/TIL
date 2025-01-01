@@ -3,6 +3,7 @@ from collections import deque
 input = sys.stdin.readline
 field = list()
 
+# bfs 
 def count():
     black_count = 0
     white_count = 0
@@ -29,6 +30,7 @@ def count():
     for row in range(m):
         for col in range(n):
             if not visited[row][col]:
+                # 팀별 처리
                 if field[row][col] == "B":
                     black_count += bfs(row, col, "B") ** 2
                 elif field[row][col] == "W":
