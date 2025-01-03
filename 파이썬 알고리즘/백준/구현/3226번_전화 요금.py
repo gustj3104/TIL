@@ -24,8 +24,7 @@ for _ in range(n):
                 break
         else:  # 밤 요금
             if minute + count > 60:  # 현재 시간대에서 남은 분 초과
-                remaining_minutes = 60 - minute5
-                
+                remaining_minutes = 60 - minute
                 total += remaining_minutes * 5
                 count -= remaining_minutes
                 hour += 1
