@@ -11,18 +11,17 @@ def bfs():
     queue = deque()
     total_days = 0
 
-    for i in range(n):
-        for j in range(m):
-            if field[i][j] == 1:
-                queue.append((i, j, 0))
-
+    for row in range(n):
+        for col in range(m):
+            if field[row][col] == 1:
+                queue.append((row, col, 0))
+    
     while queue:
         x, y, days = queue.popleft()
         total_days = max(total_days, days)
 
         for dx, dy in directions:
             nx, ny = x + dx, y + dy
-            
             if 0 <= nx < n and 0 <= ny < m and field[nx][ny] == 0:
                 field[nx][ny] = 1
                 queue.append((nx, ny, days + 1))
@@ -30,7 +29,7 @@ def bfs():
     for row in field:
         if 0 in row:
             return -1
-        
+
     return total_days
 
 print(bfs())
