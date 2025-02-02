@@ -21,8 +21,6 @@ input = sys.stdin.readline
 n = int(input())
 skill = list(input().strip())
 used_list = []
-total = set()
-p = ""
 num = 0
 
 for s in skill:
