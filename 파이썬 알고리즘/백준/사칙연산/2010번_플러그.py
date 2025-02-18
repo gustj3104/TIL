@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 n = int(input()) # 멀티탭 수
 
 result = 0
