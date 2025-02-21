@@ -29,7 +29,7 @@ else:
 if big_inner_circle >= small_outter_circle and big_outter_circle <= P:
     print("Yes")
     exit(0)
-if A + B <= 2 * P:
+if A + B <= P:
     print("Yes")
     exit(0)
 print("No")
