@@ -7,5 +7,4 @@ if word[n-1] == 'G':
     print("".join(word[:n-1]))
 else:
     word.append("G")
-    print(word)
     print("".join(word))
