@@ -32,9 +32,6 @@ class Decls extends ArrayList<Decl> {
 	    this.add(d);
     }
 
-    public void display(int l) {
-        Indent.display(l, "Decls");
-    }
 }
 
 class Decl extends Command {
@@ -53,7 +50,14 @@ class Decl extends Command {
 
     Decl (String s, Type t, Expr e) {
         id = new Identifier(s); type = t; expr = e;
-    } // declaration 
+    } // declaration
+
+    public void display(int l) {
+        Indent.display(l, "Decl");
+        type.display(l + 1);
+        id.display(l + 1);
+        expr.display(l + 1);
+    }
 }
 
 class Functions extends ArrayList<Function> {
@@ -95,6 +99,11 @@ class Type {
     protected String id;
     protected Type(String s) { id = s; }
     public String toString ( ) { return id; }
+
+    public void display(int level) {
+        Indent.display(level, this.getClass().getSimpleName() +": " + id);
+
+    }
 }
 
 class ProtoType extends Type {
@@ -209,8 +218,20 @@ class Let extends Stmt {
 
     public void display(int level) {
         Indent.display(level, "Let");
-        decls.display(level + 1);
-        funs.display(level + 1);
+        if (decls != null) {
+            Indent.display(level + 1, "Decls");
+            for (Decl decl : decls) {
+                decl.display(level + 2);
+            }
+        }
+
+        if (stmts != null) {
+            Indent.display(level + 1, "Stmts");
+            for (Stmt stmt : stmts) {
+                stmt.display(level + 2);
+            }
+        }
+
     }
 }
 
@@ -304,6 +325,10 @@ class Identifier extends Expr {
         String s = ((Identifier) obj).id;
         return id.equals(s);
     }
+
+    public void display(int level) {
+        Indent.display(level, this.getClass().getSimpleName() +": " + toString());
+    }
 }
 
 class Array extends Expr {
@@ -387,8 +412,8 @@ class Value extends Expr {
         return "undef";
     }
 
-    public void display() {
-        System.out.println();
+    public void display(int level) {
+        Indent.display(level, this.getClass().getSimpleName() +": " + toString());
     }
 }
 
