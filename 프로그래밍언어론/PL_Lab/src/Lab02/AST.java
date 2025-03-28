@@ -7,7 +7,7 @@ class Indent {
         String tab = "";
         System.out.println();
         for (int i = 0; i < level; i++)
-            tab = tab + "    ";
+            tab = tab + "     ";
         System.out.print(tab + s);
     }
 }
@@ -19,7 +19,7 @@ abstract class Command {
         String tab = "";
         System.out.println();
         for (int i = 0; i < l; i++)
-            tab = tab + "    ";
+            tab = tab + "     ";
         System.out.print(tab);
     }
 }
@@ -56,7 +56,9 @@ class Decl extends Command {
         Indent.display(l, "Decl");
         type.display(l + 1);
         id.display(l + 1);
-        expr.display(l + 1);
+        if (expr != null) {
+            expr.display(l + 1);
+        }
     }
 }
 
@@ -128,9 +130,9 @@ class Empty extends Stmt {
 class Stmts extends Stmt {
     // Stmts = Stmt*
     public ArrayList<Stmt> stmts = new ArrayList<Stmt>();
-    
+
     Stmts() {
-	    super(); 
+	    super();
     }
 
     Stmts(Stmt s) {
@@ -227,7 +229,7 @@ class Let extends Stmt {
 
         if (stmts != null) {
             Indent.display(level + 1, "Stmts");
-            for (Stmt stmt : stmts) {
+            for (Stmt stmt : stmts.stmts) {
                 stmt.display(level + 2);
             }
         }
@@ -461,11 +463,7 @@ class Operator {
 	return val.equals(obj); 
     }
 
-    public void display(int l) {
-        String tab = "";
-        System.out.println();
-        for (int i = 0; i < l; i++)
-            tab = tab + "    ";
-        System.out.print(tab);
+    public void display(int level) {
+        Indent.display(level, this.getClass().getSimpleName() +": " + toString());
     }
 }
