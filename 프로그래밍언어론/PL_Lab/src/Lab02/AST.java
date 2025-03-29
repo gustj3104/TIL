@@ -7,7 +7,7 @@ class Indent {
         String tab = "";
         System.out.println();
         for (int i = 0; i < level; i++)
-            tab = tab + "     ";
+            tab = tab + "       ";
         System.out.print(tab + s);
     }
 }
@@ -16,11 +16,6 @@ abstract class Command {
     Type type =Type.UNDEF;
 
     public void display(int l) {
-        String tab = "";
-        System.out.println();
-        for (int i = 0; i < l; i++)
-            tab = tab + "     ";
-        System.out.print(tab);
     }
 }
 
@@ -196,8 +191,17 @@ class While extends Stmt {
     public void display(int level) {
         Indent.display(level, "While");
         expr.display(level + 1);
-        stmt.display(level + 1);
+
+        if (stmt instanceof Stmts) {
+            Indent.display(level + 1, "Stmts");
+            for (Stmt s : ((Stmts) stmt).stmts) {
+                s.display(level + 2);
+            }
+        } else {
+            stmt.display(level + 1);
+        }
     }
+
 }
 
 class Let extends Stmt {

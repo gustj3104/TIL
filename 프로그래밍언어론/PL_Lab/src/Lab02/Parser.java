@@ -167,7 +167,7 @@ public class Parser {
     private Stmts stmts() {
         // <block> -> {<stmt>}
         Stmts ss = new Stmts();
-        while ((token != Token.RBRACE) && (token != Token.END))
+        while((token != Token.RBRACE) && (token != Token.END))
             ss.stmts.add(stmt());
         return ss;
     }
@@ -260,8 +260,8 @@ public class Parser {
         match(Token.LPAREN);
         Expr e = expr();
         match(Token.RPAREN);
-        Stmt s = stmt();
 
+        Stmt s = stmt();
         return new While(e, s);
     }
 
