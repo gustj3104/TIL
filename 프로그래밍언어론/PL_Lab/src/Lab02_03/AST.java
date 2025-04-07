@@ -1,4 +1,4 @@
-package Lab02;// AST.java
+package Lab02_03;// AST.java
 // AST for S
 import java.util.*;
 
@@ -13,7 +13,7 @@ class Indent {
 }
 abstract class Command {
     // Command = Decl | Function | Stmt
-    Type type =Type.UNDEF;
+    public Type type =Type.UNDEF;
 
     public void display(int l) {
     }
@@ -82,8 +82,8 @@ class Function extends Command  {
 
 class Type {
     // Type = int | bool | string | fun | array | except | void
-    final static Type INT = new Type("int");
-    final static Type BOOL = new Type("bool");
+    public final static Type INT = new Type("int");
+    public final static Type BOOL = new Type("bool");
     final static Type STRING = new Type("string");
     final static Type VOID = new Type("void");
     final static Type FUN = new Type("fun");
@@ -91,7 +91,7 @@ class Type {
     final static Type EXC = new Type("exc");
     final static Type RAISEDEXC = new Type("raisedexc");
     final static Type UNDEF = new Type("undef");
-    final static Type ERROR = new Type("error");
+    public final static Type ERROR = new Type("error");
     
     protected String id;
     protected Type(String s) { id = s; }
@@ -139,7 +139,7 @@ class Assignment extends Stmt {
     // Assignment = Identifier id; Expr expr
     Identifier id;
     Array ar = null;
-    Expr expr;
+    public Expr expr;
 
     Assignment (Identifier t, Expr e) {
         id = t;
@@ -160,8 +160,9 @@ class Assignment extends Stmt {
 
 class If extends Stmt {
     // If = Expr expr; Stmt stmt1, stmt2;
-    Expr expr;
-    Stmt stmt1, stmt2;
+    public Expr expr;
+    public Stmt stmt1;
+    public Stmt stmt2;
     
     If (Expr t, Stmt tp) {
         expr = t; stmt1 = tp; stmt2 = new Empty( );
@@ -181,8 +182,8 @@ class If extends Stmt {
 
 class While extends Stmt {
     // While = Expr expr; Stmt stmt;
-    Expr expr;
-    Stmt stmt;
+    public Expr expr;
+    public Stmt stmt;
 
     While (Expr t, Stmt b) {
         expr = t; stmt = b;
@@ -206,9 +207,9 @@ class While extends Stmt {
 
 class Let extends Stmt {
     // Let = Decls decls; Functions funs; Stmts stmts;
-    Decls decls;
+    public Decls decls;
     Functions funs;
-    Stmts stmts;
+    public Stmts stmts;
 
     Let(Decls ds, Stmts ss) {
         decls = ds;
@@ -243,7 +244,7 @@ class Let extends Stmt {
 
 class Read extends Stmt {
     // Read = Identifier id
-    Identifier id;
+    public Identifier id;
 
     Read (Identifier v) {
         id = v;
@@ -257,7 +258,7 @@ class Read extends Stmt {
 
 class Print extends Stmt {
     // Print =  Expr expr
-    Expr expr;
+    public Expr expr;
 
     Print (Expr e) {
         expr = e;
@@ -309,7 +310,7 @@ abstract class Expr extends Stmt {
 
 }
 
-class Call extends Expr { 
+class Call extends Expr {
     Identifier fid;  
     Exprs args;
 
@@ -354,7 +355,7 @@ class Array extends Expr {
 
 class Value extends Expr {
     // Value = int | bool | string | array | function 
-    protected boolean undef = true;
+    public boolean undef = true;
     Object value = null; // Type type;
     
     Value(Type t) {
@@ -365,7 +366,7 @@ class Value extends Expr {
         undef = false;
     }
 
-    Value(Object v) {
+    public Value(Object v) {
         if (v instanceof Integer) type = Type.INT;
         if (v instanceof Boolean) type = Type.BOOL;
         if (v instanceof String) type = Type.STRING;
@@ -376,13 +377,13 @@ class Value extends Expr {
 
     Object value() { return value; }
 
-    int intValue( ) { 
+    public int intValue() {
         if (value instanceof Integer) 
             return ((Integer) value).intValue(); 
         else return 0;
     }
     
-    boolean boolValue( ) { 
+    public boolean boolValue() {
         if (value instanceof Boolean) 
             return ((Boolean) value).booleanValue(); 
         else return false;
@@ -425,8 +426,9 @@ class Value extends Expr {
 
 class Binary extends Expr {
 // Binary = Operator op; Expr expr1; Expr expr2;
-    Operator op;
-    Expr expr1, expr2;
+public Operator op;
+    public Expr expr1;
+    public Expr expr2;
 
     Binary (Operator o, Expr e1, Expr e2) {
         op = o; expr1 = e1; expr2 = e2;
@@ -442,8 +444,8 @@ class Binary extends Expr {
 
 class Unary extends Expr {
     // Unary = Operator op; Expr expr
-    Operator op;
-    Expr expr;
+    public Operator op;
+    public Expr expr;
 
     Unary (Operator o, Expr e) {
         op = o; //(o.val == "-") ? new Operator("neg"): o; 
@@ -453,7 +455,7 @@ class Unary extends Expr {
 }
 
 class Operator {
-    String val;
+    public String val;
     
     Operator (String s) { 
 	val = s; 

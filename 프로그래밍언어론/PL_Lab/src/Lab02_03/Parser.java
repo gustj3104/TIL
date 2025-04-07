@@ -1,9 +1,9 @@
-package Lab02;// Parser.java
+package Lab02_03;// Parser.java
 // Parser for language S
 
 public class Parser {
-    Token token;          // current token 
-    Lexer lexer;
+    public Token token;          // current token
+    public Lexer lexer;
     String funId = "";
 
     public Parser(Lexer scan) {

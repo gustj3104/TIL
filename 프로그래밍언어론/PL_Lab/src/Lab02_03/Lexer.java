@@ -1,4 +1,4 @@
-package Lab02;// Lexer.java
+package Lab02_03;// Lexer.java
 // Lexical analyzer for S
 
 import java.io.*;
@@ -8,7 +8,7 @@ public class Lexer {
     private BufferedReader input;
     private final char eolnCh = '\n';
     private final char eofCh = '\004';
-    static boolean interactive = false;
+    public static boolean interactive = false;
 
     public Lexer (String fileName) { // source filename
         try {
