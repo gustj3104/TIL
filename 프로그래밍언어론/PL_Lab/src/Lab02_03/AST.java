@@ -19,41 +19,18 @@ abstract class Command {
     }
 }
 
-class For extends Stmt {
-    public Decl decl;
-    public Expr expr1;
-    public Stmt st1;
-    public Stmt st2;
+class Commands extends Command {
+    public List<Command> commands;
 
-    public For(Decl d, Expr e1, Stmt s1, Stmt s2) {
-        decl = null;
-        expr1 = e1;
-        st1 = s1;
-        st2 = s2;
+    public Commands(List<Command> cmds) {
+        commands = cmds;
     }
 
     public void display(int level) {
-        Indent.display(level, "For");
-        decl.display(level + 1);
-        expr1.display(level + 1);
-        st1.display(level + 1);
-        st2.display(level + 1);
-    }
-}
-
-class DoWhile extends Stmt {
-    public Stmt st;
-    public Expr expr;
-
-    public DoWhile(Stmt s, Expr e){
-        st = s;
-        expr = e;
-    }
-
-    public void display(int level) {
-        Indent.display(level, "While");
-        st.display(level + 1);
-        expr.display(level + 1);
+        Indent.display(level, this.getClass().getSimpleName());
+        for (Command c : commands) {
+            c.display(level + 1);
+        }
     }
 }
 
@@ -165,11 +142,23 @@ class Stmts extends Stmt {
     public ArrayList<Stmt> stmts = new ArrayList<Stmt>();
 
     Stmts() {
-	    super();
+        super();
     }
 
     Stmts(Stmt s) {
-	     stmts.add(s);
+        stmts.add(s);
+    }
+
+    Stmts(ArrayList<Stmt> stmtList) {
+        stmts = stmtList;
+    }
+
+    public void display(int level) {
+        Indent.display(level, "Stmts");
+        for (Stmt s : stmts) {
+            if (s != null)
+                s.display(level + 1);
+        }
     }
 }
 
@@ -232,14 +221,12 @@ class While extends Stmt {
         expr.display(level + 1);
 
         if (stmt instanceof Stmts) {
-            Indent.display(level + 1, "Stmts");
-            for (Stmt s : ((Stmts) stmt).stmts) {
-                s.display(level + 2);
-            }
+            ((Stmts) stmt).display(level + 1);
         } else {
             stmt.display(level + 1);
         }
     }
+
 
 }
 
@@ -263,6 +250,7 @@ class Let extends Stmt {
 
     public void display(int level) {
         Indent.display(level, "Let");
+
         if (decls != null) {
             Indent.display(level + 1, "Decls");
             for (Decl decl : decls) {
@@ -271,13 +259,11 @@ class Let extends Stmt {
         }
 
         if (stmts != null) {
-            Indent.display(level + 1, "Stmts");
-            for (Stmt stmt : stmts.stmts) {
-                stmt.display(level + 2);
-            }
+//            Indent.display(level + 1, "Stmts");
+            stmts.display(level + 2);
         }
-
     }
+
 }
 
 class Read extends Stmt {

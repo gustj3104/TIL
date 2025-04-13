@@ -1,10 +1,16 @@
 package Lab02_03;// Parser.java
 // Parser for language S
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Parser {
     public Token token;          // current token
     public Lexer lexer;
     String funId = "";
+    public static Map<String, Type> symbolTable = new HashMap<>();
 
     public Parser(Lexer scan) {
         lexer = scan;
@@ -60,8 +66,9 @@ public class Parser {
             d = new Decl(id, t, e);
         } else
             d = new Decl(id, t);
-
         match(Token.SEMICOLON);
+
+        symbolTable.put(id, t);
         return d;
     }
 
@@ -162,7 +169,7 @@ public class Parser {
                 s = forstmt();
                 return s;
             case DO:
-                s = doWhileStmt();
+                s = dowhileStmt();
                 return s;
             default:
                 error("Illegal stmt");
@@ -171,42 +178,18 @@ public class Parser {
     }
 
     private Stmts stmts() {
-        // <block> -> {<stmt>}
         Stmts ss = new Stmts();
-        while((token != Token.RBRACE) && (token != Token.END))
-            ss.stmts.add(stmt());
+        while (token != Token.END && token != Token.RPAREN && token != Token.WHILE && token != Token.RBRACE && token != Token.EOF) {
+            Stmt s = stmt();
+            if (s != null)
+                ss.stmts.add(s);
+            else
+                break;
+        }
         return ss;
     }
 
-    private For forstmt() {
-        //| for (<type> id = <expr>; <expr>; id = <expr>) <stmt>
-        match(Token.FOR);
-        match(Token.LPAREN);
-        Decl decl = decl();
-        match(Token.SEMICOLON);
 
-        Expr expr1 = expr();
-        match(Token.SEMICOLON);
-
-        Stmt st1 = stmt();
-        match(Token.RPAREN);
-        Stmt st2 = stmt();
-
-        return new For(decl, expr1, st1, st2);
-    }
-
-    private DoWhile doWhileStmt() {
-        //  | do <stmt> while (<expr>);
-        match(Token.DO);
-        Stmt st = stmt();
-        match(Token.WHILE);
-        match(Token.LPAREN);
-        Expr expr1 = expr();
-        match(Token.RPAREN);
-        match(Token.SEMICOLON);
-
-        return new DoWhile(st, expr1);
-    }
 
     private Let letStmt() {
         // <letStmt> -> let <decls> in <block> end
@@ -251,10 +234,10 @@ public class Parser {
     private Stmt assignment() {
         // <assignment> -> id = <expr>;
         Identifier id = new Identifier(match(Token.ID));
-	/*
-	    if (token == Token.LPAREN)    // function call 
+
+	    if (token == Token.LPAREN)    // function call
 	        return call(id);
-	*/
+
 
         match(Token.ASSIGN);
         Expr e = expr();
@@ -262,7 +245,7 @@ public class Parser {
         return new Assignment(id, e);
     }
 
-/*
+
     private Call call(Identifier id) {
     // <call> -> id(<expr>{,<expr>});
     //
@@ -270,7 +253,7 @@ public class Parser {
     //
 	return null;
     }
-*/
+
 
     private If ifStmt() {
         // <ifStmt> -> if (<expr>) then <stmt> [else <stmt>]
@@ -300,6 +283,61 @@ public class Parser {
         Stmt s = stmt();
         return new While(e, s);
     }
+
+    private Stmt forstmt() {
+        match(Token.FOR);
+        match(Token.LPAREN);
+
+        Decl decl = decl();
+        Expr condition = expr();
+        match(Token.SEMICOLON);
+
+        Identifier id = new Identifier(match(Token.ID));
+        match(Token.ASSIGN);
+        Expr rhs = expr();
+        Stmt increment = new Assignment(id, rhs);
+
+        match(Token.RPAREN);
+
+        Stmts whileBody;
+        Stmt body = stmt();
+        if (body instanceof Stmts) {
+            ArrayList<Stmt> stmts = new ArrayList<>(((Stmts) body).stmts);
+            stmts.add(increment);
+            whileBody = new Stmts(stmts);
+        } else {
+            whileBody = new Stmts(new ArrayList<>(List.of(body, increment)));
+        }
+
+        While whileStmt = new While(condition, whileBody);
+
+        Decls decls = new Decls();
+        decls.add(decl);
+        return new Let(decls, new Stmts(new ArrayList<>(List.of(whileStmt))));
+    }
+
+    private Stmt dowhileStmt() {
+        match(Token.DO);
+        Stmts doBlock = stmts();
+        match(Token.WHILE);
+        match(Token.LPAREN);
+        Expr condition = expr();
+        match(Token.RPAREN);
+        match(Token.SEMICOLON);
+
+        Stmts whileBody = new Stmts(new ArrayList<>(doBlock.stmts));
+        While whileStmt = new While(condition, whileBody);
+
+
+        Stmts full = new Stmts(new ArrayList<>());
+
+        full.stmts.addAll(doBlock.stmts);
+        full.stmts.add(whileStmt);
+
+        return full;
+
+    }
+
 
     private Expr expr() {
         // <expr> -> <bexp> {& <bexp> | '|'<bexp>} | !<expr> | true | false
