@@ -158,6 +158,12 @@ public class Parser {
             case RETURN: // return statement
                 s = returnStmt();
                 return s;
+            case FOR:
+                s = forstmt();
+                return s;
+            case DO:
+                s = doWhileStmt();
+                return s;
             default:
                 error("Illegal stmt");
                 return null;
@@ -170,6 +176,36 @@ public class Parser {
         while((token != Token.RBRACE) && (token != Token.END))
             ss.stmts.add(stmt());
         return ss;
+    }
+
+    private For forstmt() {
+        //| for (<type> id = <expr>; <expr>; id = <expr>) <stmt>
+        match(Token.FOR);
+        match(Token.LPAREN);
+        Decl decl = decl();
+        match(Token.SEMICOLON);
+
+        Expr expr1 = expr();
+        match(Token.SEMICOLON);
+
+        Stmt st1 = stmt();
+        match(Token.RPAREN);
+        Stmt st2 = stmt();
+
+        return new For(decl, expr1, st1, st2);
+    }
+
+    private DoWhile doWhileStmt() {
+        //  | do <stmt> while (<expr>);
+        match(Token.DO);
+        Stmt st = stmt();
+        match(Token.WHILE);
+        match(Token.LPAREN);
+        Expr expr1 = expr();
+        match(Token.RPAREN);
+        match(Token.SEMICOLON);
+
+        return new DoWhile(st, expr1);
     }
 
     private Let letStmt() {

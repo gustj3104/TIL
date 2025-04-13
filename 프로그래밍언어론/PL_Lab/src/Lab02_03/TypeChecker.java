@@ -210,7 +210,7 @@ public class TypeChecker {
         }
         Type t1 = te.get(a.id);
         Type t2 = Check(a.expr, te);
-	    System.err.println(t1 +" <- " + t2);
+//	    System.err.println(t1 +" <- " + t2);
 	    if (t1 == t2) 
 	        a.type = Type.VOID;
 	    else

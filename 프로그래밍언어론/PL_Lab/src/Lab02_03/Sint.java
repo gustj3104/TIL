@@ -51,7 +51,7 @@ public class Sint {
         throw new IllegalArgumentException("no statement");
     }
 
-/*
+
     // call without return value
     State Eval(Call c, State state) {
 	//
@@ -98,7 +98,6 @@ public class Sint {
 	//
 	    return state;
     }
-*/
 
     State Eval(Empty s, State state) {
         return state;
@@ -110,19 +109,21 @@ public class Sint {
     }
 
     State Eval(Read r, State state) {
+
         if (r.id.type == Type.INT) {
 	        int i = sc.nextInt();
 	        state.set(r.id, new Value(i));
-	    } 
-
-	    if (r.id.type == Type.BOOL) {
-	        boolean b = sc.nextBoolean();	
-            state.set(r.id, new Value(b));
 	    }
 
-	//
+	    if (r.id.type == Type.BOOL) {
+	        boolean b = sc.nextBoolean();
+            state.set(r.id, new Value(b));
+	    }
 	// input string
-	//
+        if (r.id.type == Type.STRING) {
+            String s = sc.next();
+            state.set(r.id, new Value(s));
+        }
 
 	    return state;
     }
@@ -162,20 +163,35 @@ public class Sint {
     }
 
     State allocate (Decls ds, State state) {
-		if (ds != null) {
+        if (ds != null) {
             for (Decl decl : ds) {
-                state.push(decl.id, new Value(decl));
+                Value val;
+
+                if (decl.expr != null) {
+                    val = V(decl.expr, state);
+                } else {
+                    if (decl.type == Type.INT) {
+                        val = new Value(0);
+                    } else if (decl.type == Type.BOOL) {
+                        val = new Value(false);
+                    } else if (decl.type == Type.STRING) {
+                        val = new Value("");
+                    } else {
+                        throw new RuntimeException("Unknown type");
+                    }
+                }
+                state.push(decl.id, val);
             }
         }
-    // add entries for declared variables on the state
         return state;
     }
 
+
     State free (Decls ds, State state) {
 		if (ds != null){
-//            for (Decl decl : ds) {
-            state.pop();
-//            }
+            for (Decl decl : ds) {
+                state.pop();
+            }
             // free the entries for declared variables from the state
         }
         return state;
@@ -183,38 +199,87 @@ public class Sint {
 
     Value binaryOperation(Operator op, Value v1, Value v2) {
         check(!v1.undef && !v2.undef,"reference to undef value");
-	    switch (op.val) {
-	    case "+":
-            return new Value(v1.intValue() + v2.intValue());
-        case "-":
-            return new Value(v1.intValue() - v2.intValue());
-        case "*":
-            return new Value(v1.intValue() * v2.intValue());
-        case "/":
-            return new Value(v1.intValue() / v2.intValue());
-	// relational operations
-        case "<":
-            return new Value(v2.stringValue().compareTo(v1.stringValue()) > 0);
-        case "<=":
-            return new Value(v2.stringValue().compareTo(v1.stringValue()) >= 0);
-        case ">":
-            return new Value(v2.stringValue().compareTo(v1.stringValue()) < 0);
-        case ">=":
-            return new Value(v2.stringValue().compareTo(v1.stringValue()) <= 0);
-        case "==":
-            return new Value(v1.stringValue().compareTo(v2.stringValue()) == 0);
-        case "!=":
-            return new Value(v1.stringValue().compareTo(v2.stringValue()) != 0);
-	// logical operations
-        case "&":
-            return new Value(v1.boolValue() && v2.boolValue());
-        case "|":
-            return new Value(v1.boolValue() || v2.boolValue());
-	    default:
-	        throw new IllegalArgumentException("no operation");
-	    }
+        switch (op.val) {
+            case "+":
+                return new Value(v1.intValue() + v2.intValue());
+            case "-":
+                return new Value(v1.intValue() - v2.intValue());
+            case "*":
+                return new Value(v1.intValue() * v2.intValue());
+            case "/":
+                return new Value(v1.intValue() / v2.intValue());
+
+            // relational operations
+            case "<":
+                if (v1.type == Type.INT && v2.type == Type.INT) {
+                    return new Value(v1.intValue() < v2.intValue());
+                } else if (v1.type == Type.STRING && v2.type == Type.STRING) {
+                    return new Value(v1.stringValue().compareTo(v2.stringValue()) < 0);
+                }
+                break;
+            case "<=":
+                if (v1.type == Type.INT && v2.type == Type.INT) {
+                    return new Value(v1.intValue() <= v2.intValue());
+                } else if (v1.type == Type.STRING && v2.type == Type.STRING) {
+                    return new Value(v1.stringValue().compareTo(v2.stringValue()) <= 0);
+                }
+                break;
+
+            case ">":
+                if (v1.type == Type.INT && v2.type == Type.INT) {
+                    return new Value(v1.intValue() > v2.intValue());
+                } else if (v1.type == Type.STRING && v2.type == Type.STRING) {
+                    return new Value(v1.stringValue().compareTo(v2.stringValue()) > 0);
+                }
+                break;
+
+            case ">=":
+                if (v1.type == Type.INT && v2.type == Type.INT) {
+                    return new Value(v1.intValue() >= v2.intValue());
+                } else if (v1.type == Type.STRING && v2.type == Type.STRING) {
+                    return new Value(v1.stringValue().compareTo(v2.stringValue()) >= 0);
+                }
+                break;
+
+            case "==":
+                if (v1.type == Type.INT && v2.type == Type.INT) {
+                    return new Value(v1.intValue() == v2.intValue());
+                } else if (v1.type == Type.STRING && v2.type == Type.STRING) {
+                    return new Value(v1.stringValue().equals(v2.stringValue()));
+                } else if (v1.type == Type.BOOL && v2.type == Type.BOOL) {
+                    return new Value(v1.boolValue() == v2.boolValue());
+                }
+                break;
+
+            case "!=":
+                if (v1.type == Type.INT && v2.type == Type.INT) {
+                    return new Value(v1.intValue() != v2.intValue());
+                } else if (v1.type == Type.STRING && v2.type == Type.STRING) {
+                    return new Value(!v1.stringValue().equals(v2.stringValue()));
+                } else if (v1.type == Type.BOOL && v2.type == Type.BOOL) {
+                    return new Value(v1.boolValue() != v2.boolValue());
+                }
+                break;
+                // logical operations
+            case "&":
+                if (v1.type == Type.BOOL && v2.type == Type.BOOL) {
+                    return new Value(v1.boolValue() && v2.boolValue());
+                }
+                break;
+
+            case "|":
+                if (v1.type == Type.BOOL && v2.type == Type.BOOL) {
+                    return new Value(v1.boolValue() || v2.boolValue());
+                }
+                break;
+
+//            default:
+
+        }
+        throw new IllegalArgumentException("no operation");
     }
-    
+
+
     Value unaryOperation(Operator op, Value v) {
         check( !v.undef, "reference to undef value");
 	    switch (op.val) {

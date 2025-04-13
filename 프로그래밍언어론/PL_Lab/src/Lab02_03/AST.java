@@ -19,6 +19,44 @@ abstract class Command {
     }
 }
 
+class For extends Stmt {
+    public Decl decl;
+    public Expr expr1;
+    public Stmt st1;
+    public Stmt st2;
+
+    public For(Decl d, Expr e1, Stmt s1, Stmt s2) {
+        decl = null;
+        expr1 = e1;
+        st1 = s1;
+        st2 = s2;
+    }
+
+    public void display(int level) {
+        Indent.display(level, "For");
+        decl.display(level + 1);
+        expr1.display(level + 1);
+        st1.display(level + 1);
+        st2.display(level + 1);
+    }
+}
+
+class DoWhile extends Stmt {
+    public Stmt st;
+    public Expr expr;
+
+    public DoWhile(Stmt s, Expr e){
+        st = s;
+        expr = e;
+    }
+
+    public void display(int level) {
+        Indent.display(level, "While");
+        st.display(level + 1);
+        expr.display(level + 1);
+    }
+}
+
 class Decls extends ArrayList<Decl> {
     // Decls = Decl*
 
