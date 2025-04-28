@@ -162,6 +162,14 @@ public class Sint {
 	    return free(l.decls, s);
     }
 
+    State allocate(Decl ds, State state) {
+        if (ds != null) {
+            Value val = V(ds.expr, state);
+            state.push(ds.id, val);
+        }
+        return state;
+    }
+
     State allocate (Decls ds, State state) {
         if (ds != null) {
             for (Decl decl : ds) {
@@ -321,6 +329,13 @@ public class Sint {
 
         if (e instanceof Call) 
     	    return V((Call)e, state);  
+
+        if (e instanceof Array) {
+            // id[e]값 조회
+            Value v =
+            return V(v, state);
+        }
+
         throw new IllegalArgumentException("no operation");
     }
 
@@ -339,15 +354,15 @@ public class Sint {
 	            Command command=null;
                 try {
 	                command = parser.command();
-                    if (command != null)  command.display(0);    // display AST
+                    // if (command != null)  command.display(0);    // display AST
 				    if (command == null) 
 						 throw new Exception();
 					 else  {
 						 command.type = TypeChecker.Check(command); 
-                         System.out.println("Type: "+ command.type);
+//                         System.out.println("Type: "+ command.type);
 					 }
                 } catch (Exception e) {
-                    System.out.println(e);
+//                    System.out.println(e);
 		            System.out.print(">> ");
                     continue;
                 }
@@ -375,7 +390,7 @@ public class Sint {
 	         
                 try {
 	                command = parser.command();
-                    if (command != null)  command.display(0);    // display AST
+//                    if (command != null)  command.display(0);    // display AST
 				    if (command == null) 
 						 throw new Exception();
 					 else  {

@@ -1,10 +1,7 @@
 package Lab02_03;// Parser.java
 // Parser for language S
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Parser {
     public Token token;          // current token
@@ -60,14 +57,31 @@ public class Parser {
         Type t = type();
         String id = match(Token.ID);
         Decl d = null;
+
+        if (token == Token.LBRACKET) {
+            match(Token.LBRACKET);
+            // ordinal 검증 필요
+            if (token == Token.NUMBER) {
+                int n = token.ordinal();
+                match(Token.NUMBER);
+                match(Token.RBRACKET);
+                d = new Decl(id, t, n);
+            } else {
+//                match(Token.LBRACKET);
+                Expr e = expr();
+                match(Token.RBRACKET);
+                d = new Decl(id, t, e);
+            }
+        }
+
         if (token == Token.ASSIGN) {
             match(Token.ASSIGN);
             Expr e = expr();
             d = new Decl(id, t, e);
         } else
             d = new Decl(id, t);
-        match(Token.SEMICOLON);
 
+        match(Token.SEMICOLON);
         symbolTable.put(id, t);
         return d;
     }
@@ -235,9 +249,19 @@ public class Parser {
         // <assignment> -> id = <expr>;
         Identifier id = new Identifier(match(Token.ID));
 
+        if (token == Token.LBRACKET) {
+            match(Token.LBRACKET);
+            Expr e1 = expr();
+            match(Token.RBRACKET);
+            Array a = new Array(id, e1);
+            match(Token.ASSIGN);
+            Expr e2 = expr();
+            match(Token.SEMICOLON);
+            return new Assignment(a, e2);
+        }
+
 	    if (token == Token.LPAREN)    // function call
 	        return call(id);
-
 
         match(Token.ASSIGN);
         Expr e = expr();
@@ -402,7 +426,7 @@ public class Parser {
     }
 
     private Expr factor() {
-        // <factor> -> [-](id | <call> | literal | '('<aexp> ')')
+        // <factor> -> [-](id | id '[' <expr> ']' | <call> | literal | '('<aexp> ')')
         Operator op = null;
         if (token == Token.MINUS)
             op = new Operator(match(Token.MINUS));
@@ -418,6 +442,13 @@ public class Parser {
                     match(Token.RPAREN);
                     e = c;
                 }
+                // array
+                if (token == Token.LBRACKET) {
+                    match(Token.LBRACKET);
+                    e = expr();
+                    match(Token.RBRACKET);
+                }
+
                 break;
             case NUMBER:
             case STRLITERAL:
