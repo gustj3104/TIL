@@ -70,9 +70,7 @@ public class Parser {
                 match(Token.RBRACKET);
                 d = new Decl(id, t, e);
             }
-        }
-
-        if (token == Token.ASSIGN) {
+        } else if (token == Token.ASSIGN) {
             match(Token.ASSIGN);
             Expr e = expr();
             d = new Decl(id, t, e);
@@ -256,9 +254,7 @@ public class Parser {
             Expr e2 = expr();
             match(Token.SEMICOLON);
             return new Assignment(a, e2);
-        }
-
-	    if (token == Token.LPAREN)    // function call
+        } else if (token == Token.LPAREN)    // function call
 	        return call(id);
 
         match(Token.ASSIGN);

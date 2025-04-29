@@ -105,19 +105,26 @@ public class Sint {
 
     State Eval(Assignment a, State state) {
         if (a.id instanceof Identifier) {  // 변수에 할당인 경우
-            Value v = V(a.expr, state);  // expr을 평가하여 값 구하기
-            Decl decl = new Decl(a.id.toString(), v.type(), v);  // 새로운 선언 객체 생성
-            Decls decls = new Decls(decl);  // 하나의 선언을 포함하는 Decls 객체 생성
-            state = allocate(decls, state);  // 상태에 선언 반영
-            return state.set(a.id, v);  // 변수에 값 설정
+            Value v = V(a.expr, state);
+            return state.set(a.id, v);
         } else if (a.ar instanceof Array) {  // 배열에 할당인 경우
             Array arr = a.ar;
-            Value arrayValue = (Value) state.get(arr.id);  // 배열값 가져오기
-            Value indexValue = V(arr.expr, state);  // 인덱스 값을 평가
-            int index = indexValue.intValue();  // 인덱스 값 얻기
-            Value valueAssign = V(a.expr, state);  // 할당할 값 평가
-            Value[] realArray = arrayValue.arrValue();  // 배열 값 얻기
-            realArray[index] = valueAssign;  // 배열의 해당 인덱스에 값 대입
+            Value arrayValue = (Value) state.get(arr.id);
+            if (arrayValue == null || arrayValue.arrValue() == null) {
+                throw new RuntimeException("Array not initialized");
+            }
+            Value indexValue = V(arr.expr, state);
+            int index = indexValue.intValue();
+            Value valueAssign = V(a.expr, state);
+            Value[] realArray = arrayValue.arrValue();
+            if (index < 0 || index >= realArray.length) {
+                throw new RuntimeException("Array index out of bounds");
+            }
+            realArray[index] = valueAssign;
+
+            /* Decl decl = new Decl(arr.id.toString(), arr.type, realArray.length);
+            Decls decls = new Decls(decl);
+            state = allocate(decls, state); */
             return state;
         }
         throw new RuntimeException("Assignment Error");
@@ -191,7 +198,15 @@ public class Sint {
                         val = new Value(false);
                     } else if (decl.type == Type.STRING) {
                         val = new Value("");
-                    } else {
+                    } else if (decl.type == Type.ARRAY) {
+                        int size = decl.arraysize;
+                        Value[] arr = new Value[size];
+                        for (int i = 0; i < size; i++) {
+                            arr[i] = new Value(0);
+                        }
+                        val = new Value(arr);
+
+                } else {
                         throw new RuntimeException("Unknown type");
                     }
                 }
@@ -417,7 +432,7 @@ public class Sint {
                     try {
                         state = sint.Eval(command, state);
                     } catch (Exception e) {
-//                        System.err.println(e);
+                        System.err.println(e);
                     }
                 }
 	        } while (command != null);
