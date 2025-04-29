@@ -53,7 +53,7 @@ public class Parser {
     }
 
     private Decl decl() {
-        // <decl>  -> <type> id [=<expr>];
+        // <decl>  -> <type> id [=<expr>]; | <type> id[n];
         Type t = type();
         String id = match(Token.ID);
         Decl d = null;
@@ -241,7 +241,7 @@ public class Parser {
     }
 
     private Stmt assignment() {
-        // <assignment> -> id = <expr>;
+        // <assignment> -> id = <expr>; | id[<expr>] = <expr>;
         Identifier id = new Identifier(match(Token.ID));
 
         if (token == Token.LBRACKET) {
