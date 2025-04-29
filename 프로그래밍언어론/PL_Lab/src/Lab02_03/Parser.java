@@ -64,11 +64,11 @@ public class Parser {
                 int n = Integer.parseInt(token.value());
                 match(Token.NUMBER);
                 match(Token.RBRACKET);
-                d = new Decl(id, t, n);
+                d = new Decl(id, Type.ARRAY, n);
             } else {
                 Expr e = expr();
                 match(Token.RBRACKET);
-                d = new Decl(id, t, e);
+                d = new Decl(id, Type.ARRAY, e);
             }
         } else if (token == Token.ASSIGN) {
             match(Token.ASSIGN);
@@ -78,7 +78,7 @@ public class Parser {
             d = new Decl(id, t);
 
         match(Token.SEMICOLON);
-        symbolTable.put(id, t);
+        symbolTable.put(id, d.type);
         return d;
     }
 
@@ -189,7 +189,8 @@ public class Parser {
 
     private Stmts stmts() {
         Stmts ss = new Stmts();
-        while (token != Token.END && token != Token.RPAREN && token != Token.WHILE && token != Token.RBRACE && token != Token.EOF) {
+        while (true) {
+            if (token == Token.END || token == Token.RBRACE || token == Token.EOF) break;
             Stmt s = stmt();
             if (s != null)
                 ss.stmts.add(s);
@@ -198,8 +199,6 @@ public class Parser {
         }
         return ss;
     }
-
-
 
     private Let letStmt() {
         // <letStmt> -> let <decls> in <block> end
@@ -439,8 +438,9 @@ public class Parser {
                 // array
                 if (token == Token.LBRACKET) {
                     match(Token.LBRACKET);
-                    e = expr();
+                    Expr idx = expr();
                     match(Token.RBRACKET);
+                    e = new Array(v, idx);
                 }
 
                 break;

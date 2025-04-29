@@ -109,22 +109,18 @@ public class Sint {
             return state.set(a.id, v);
         } else if (a.ar instanceof Array) {  // 배열에 할당인 경우
             Array arr = a.ar;
-            Value arrayValue = (Value) state.get(arr.id);
+            Value arrayValue = (Value) state.get(arr.id); // id로 배열 객체 조회
             if (arrayValue == null || arrayValue.arrValue() == null) {
                 throw new RuntimeException("Array not initialized");
             }
-            Value indexValue = V(arr.expr, state);
-            int index = indexValue.intValue();
-            Value valueAssign = V(a.expr, state);
-            Value[] realArray = arrayValue.arrValue();
+            Value indexValue = V(arr.expr, state); // 인덱스값
+            int index = indexValue.intValue(); // 인덱스 Value -> int로 형변환
+            Value valueAssign = V(a.expr, state); // 대입할 값 계산
+            Value[] realArray = arrayValue.arrValue(); // arrValue로 감싸고 있는 배열 직접 조회
             if (index < 0 || index >= realArray.length) {
                 throw new RuntimeException("Array index out of bounds");
             }
             realArray[index] = valueAssign;
-
-            /* Decl decl = new Decl(arr.id.toString(), arr.type, realArray.length);
-            Decls decls = new Decls(decl);
-            state = allocate(decls, state); */
             return state;
         }
         throw new RuntimeException("Assignment Error");
