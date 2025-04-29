@@ -60,14 +60,12 @@ public class Parser {
 
         if (token == Token.LBRACKET) {
             match(Token.LBRACKET);
-            // ordinal 검증 필요
             if (token == Token.NUMBER) {
-                int n = token.ordinal();
+                int n = Integer.parseInt(token.value());
                 match(Token.NUMBER);
                 match(Token.RBRACKET);
                 d = new Decl(id, t, n);
             } else {
-//                match(Token.LBRACKET);
                 Expr e = expr();
                 match(Token.RBRACKET);
                 d = new Decl(id, t, e);
