@@ -10,53 +10,37 @@ public class boj_11971 {
         int m = Integer.parseInt(st.nextToken());
         int n = Integer.parseInt(st.nextToken());
 
-        int[][] rule = new int[m][2];
-        int[][] yj = new int[n][2];
+        int[] limit = new int[100];
+        int[] yj = new int[100];
 
-        // 도로 길이, 제한 속도 배열 생성
+        int idx = 0;
         for (int i = 0; i < m; i++) {
-            st = new StringTokenizer(br.readLine(), " ");
-            int road = Integer.parseInt(st.nextToken());
+            st = new StringTokenizer(br.readLine());
+            int len = Integer.parseInt(st.nextToken());
             int speed = Integer.parseInt(st.nextToken());
-            rule[i][0] = road;
-            rule[i][1] = speed;
-        }
-
-        // 연정이의 구간, 속도 배열 생성
-        for (int i = 0; i < n; i++) {
-            st = new StringTokenizer(br.readLine(), " ");
-            int road = Integer.parseInt(st.nextToken());
-            int speed = Integer.parseInt(st.nextToken());
-            yj[i][0] = road;
-            yj[i][1] = speed;
-        }
-
-        int maxSpeed = 0;
-        int ruleIdx = 0;
-        int yjIdx = 0;
-
-        while (ruleIdx < m && yjIdx < n) {
-            int ruleLen = rule[ruleIdx][0];
-            int ruleSpd = rule[ruleIdx][1];
-            int yjLen = yj[yjIdx][0];
-            int yjSpd = yj[yjIdx][1];
-
-            int minLen = Math.min(ruleLen, yjLen);
-
-            if (yjSpd > ruleSpd) {
-                maxSpeed = Math.max(maxSpeed, yjSpd - ruleSpd);
+            for (int j = 0; j < len; j++) {
+                limit[idx++] = speed;
             }
-
-            rule[ruleIdx][0] -= minLen;
-            yj[yjIdx][0] -= minLen;
-
-            if (rule[ruleIdx][0] == 0) ruleIdx++;
-            if (yj[yjIdx][0] == 0) yjIdx++;
         }
 
+        idx = 0;
+        for (int i = 0; i < n; i++) {
+            st = new StringTokenizer(br.readLine());
+            int len = Integer.parseInt(st.nextToken());
+            int speed = Integer.parseInt(st.nextToken());
+            for (int j = 0; j < len; j++) {
+                yj[idx++] = speed;
+            }
+        }
 
-        System.out.println(maxSpeed);
+        int maxOver = 0;
+        for (int i = 0; i < 100; i++) {
+            if (yj[i] > limit[i]) {
+                maxOver = Math.max(maxOver, yj[i] - limit[i]);
+            }
+        }
 
+        System.out.println(maxOver);
     }
 }
 
