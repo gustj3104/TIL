@@ -378,7 +378,7 @@ class Array extends Expr {
 }
 
 class Value extends Expr {
-    // Value = int | bool | string | array | function 
+    // Value = int | bool | string | array | function value
     public boolean undef = true;
     Object value = null; // Type type;
     
