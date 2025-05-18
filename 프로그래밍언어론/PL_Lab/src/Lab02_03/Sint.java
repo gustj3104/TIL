@@ -56,7 +56,7 @@ public class Sint {
     State Eval(Call c, State state) {
 	//
 	// evaluate call without return value
-	//
+
 	    return state;
     }
 
@@ -79,23 +79,31 @@ public class Sint {
     State newFrame (State state, Call c, Function f) {
         if (c.args.size() == 0) 
             return state;
-	//
-	// evaluate arguments
-	//
 
-	//
-	// activate a new stack frame in the stack 
-	//
-	
-	    state.push(new Identifier("return"), null); // allocate for return value
+        Value val[] = new Value[c.args.size()];
+        for (int i = 0; i < c.args.size(); i++) {
+            val[i] = V(c.args.get(i), state);
+        }
+
+        Decls params = f.params;
+
+        for (int i = 0; i < params.size(); i++) {
+            Decl param = params.get(i);
+            String id = param.id.toString();
+            state = state.push(new Identifier(id), val[i]);
+        }
+
+        state.push(new Identifier("return"), null); // allocate for return value
         return state;
     }
 
     State deleteFrame (State state, Call c, Function f) {
 	    state.pop();  // pop the return value
-	//
-	// free a stack frame from the stack
-	//
+
+        Decls params = f.params;
+        for (int i = 0; i < params.size(); i++) {
+            state.pop();
+        }
 	    return state;
     }
 
