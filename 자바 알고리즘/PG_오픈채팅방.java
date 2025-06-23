@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Solution {
+class PG_오픈채팅방 {
   public String[] solution(String[] record) {
     HashMap<String, String> map = new HashMap<String, String>();
     List<String> answer = new ArrayList<>();
