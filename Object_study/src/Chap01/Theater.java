@@ -1,3 +1,7 @@
+package Chap01;
+
+import Chap01.Audience;
+
 public class Theater {
     private TicketSeller ticketSeller;
 

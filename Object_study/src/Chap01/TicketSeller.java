@@ -1,3 +1,8 @@
+package Chap01;
+
+import Chap01.Audience;
+import Chap01.TicketOffice;
+
 public class TicketSeller {
     private TicketOffice ticketOffice;
 

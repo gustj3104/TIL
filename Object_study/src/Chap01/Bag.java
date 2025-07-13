@@ -1,3 +1,7 @@
+package Chap01;
+
+import Chap01.Invitation;
+
 public class Bag {
     private Long amount;
     private Invitation invitation;
