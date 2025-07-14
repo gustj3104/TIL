@@ -1,19 +1,14 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class boj_14500 {
-
-  public static int N = 0;
-  public static int M =0;
-
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-    N = Integer.parseInt(st.nextToken());
-    M =Integer.parseInt(st.nextToken());
+    int N = Integer.parseInt(st.nextToken());
+    int M =Integer.parseInt(st.nextToken());
     int[][] paper = new int[N][M];
     for (int i = 0; i < N; i++) {
       st = new StringTokenizer(br.readLine(), " ");
@@ -24,7 +19,6 @@ public class boj_14500 {
 
     int max = 0;
     for (int i = 0; i < 4; i++) {
-
       max = Math.max(max, getMax(paper));
       max = Math.max(max, getMax(flip(paper)));
       paper = rotate(paper);
@@ -49,15 +43,15 @@ public class boj_14500 {
 
   // 90도 회전
   public static int[][] rotate(int[][] origin) {
-    int N = origin.length;        // 원본 행 개수
-    int M = origin[0].length;     // 원본 열 개수
+    int r = origin.length;
+    int c = origin[0].length;
 
-    // 회전 후 배열은 M×N
-    int[][] rotated = new int[M][N];
+    // 회전 후 배열은 M×r
+    int[][] rotated = new int[c][r];
 
-    for (int i = 0; i < M; i++) {
-      for (int j = 0; j < N; j++) {
-        rotated[i][j] = origin[N - 1 - j][i];
+    for (int i = 0; i < c; i++) {
+      for (int j = 0; j < r; j++) {
+        rotated[i][j] = origin[r - 1 - j][i];
       }
     }
     return rotated;
