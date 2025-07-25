@@ -7,22 +7,15 @@ public class boj_25881 {
 
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-    int init = Integer.parseInt(st.nextToken());
-    int plus = Integer.parseInt(st.nextToken());
+    String[] rate = br.readLine().split(" ");
+    int base = Integer.parseInt(rate[0]);
+    int extra = Integer.parseInt(rate[1]);
+
     int n = Integer.parseInt(br.readLine());
-
     for (int i = 0; i < n; i++) {
-      int use = Integer.parseInt(br.readLine());
-      int money;
-
-      if (use <= 1000) {
-        money = use * init;
-      } else {
-        money = (init * 1000) + ((use - 1000) * plus);
-      }
-
-      System.out.println(use + " " + money);
+      int usage = Integer.parseInt(br.readLine());
+      int cost = usage <= usage ? usage * base : (1000 * base) + (usage - 1000) * extra;
+      System.out.printf("%d %d\n", usage, cost);
     }
   }
 }
