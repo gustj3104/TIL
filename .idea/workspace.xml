@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d622ea89-43e4-4a65-9d3d-cefa0cde6e9a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/TIL.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TIL.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/PG_디스크_컨트롤러$Solution.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/PG_디스크_컨트롤러.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/PG_산모양타일링.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/PG_수식복원.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/PG_오픈채팅방.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/PG_주사위고르기$Solution.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/PG_주사위고르기.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/Solution.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_1002.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_10026.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_10040.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_1015.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_1024.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_1049.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_11059.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_11295.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_11971.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_13297.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_1439.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_14500.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_14614.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_14656.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_15633.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_15649.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_15650.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_16017.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_16928.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_20944.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_21966.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_22864.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_24082.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_24086.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_2444.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_25311.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_25707.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_25881.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_2605.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_26535.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_2729.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_27323.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_27433.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_2774.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_2783.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_27889.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_27891.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_28061.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_28444.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_28691.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_2903.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_29812.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_30143.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_30156.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_31495.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_31561.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_32154.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_33883.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_33964.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_3778.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_5013.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_5430.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_5554.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_6996.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_7569.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_7662.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_9019$Pair.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_9019.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_9093.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_9316.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/boj_9771.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/pgs_홀짝트리$Solution.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/pgs_홀짝트리.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TIL/자바 알고리즘.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/알고리즘 강의/Lab01/BinarySearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/알고리즘 강의/Lab01/BinarySearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/알고리즘 강의/Lab01/SubsetSum.java" beforeDir="false" afterPath="$PROJECT_DIR$/알고리즘 강의/Lab01/SubsetSum.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="33BR9NTtdwZYyaxymrnxCKFAeTK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.BinarySearch.executor": "Run",
+    "Application.SubsetSum.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.SubsetSum">
+    <configuration name="BinarySearch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Lab01.BinarySearch" />
+      <module name="TIL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Lab01.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubsetSum" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Lab01.SubsetSum" />
+      <module name="TIL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Lab01.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SubsetSum" />
+        <item itemvalue="Application.BinarySearch" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d622ea89-43e4-4a65-9d3d-cefa0cde6e9a" name="Changes" comment="" />
+      <created>1758788326287</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1758788326287</updated>
+    </task>
+    <servers />
+  </component>
+</project>
