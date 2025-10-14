@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/알고리즘 강의" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/자바 알고리즘" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
