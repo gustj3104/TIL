@@ -7,11 +7,6 @@ import java.util.StringTokenizer;
 
 public class InsertingOperators {
 
-    public static int isTarget() {
-
-    }
-
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int t = Integer.parseInt(br.readLine());

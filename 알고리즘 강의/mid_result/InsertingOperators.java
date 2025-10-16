@@ -1,4 +1,4 @@
-package mid;
+package mid_result;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,6 +28,8 @@ public class InsertingOperators {
      * 더하기인 경우 현재 숫자를 더해줌
      * 뺼셈인 경우 현재 숫자를 빼줌
      *
+     * base case -> 0 + {수열}
+     * 0 + 1 2에서 다음 연산자가 없다면 0 + 12가 됨 -> 1 * 10 + 2로 수정
      */
 
     public static int countopers(int n, int i, int[] opers, int T) {
@@ -37,10 +39,24 @@ public class InsertingOperators {
             int curnum = 1; // 맨 마지막에 연산하게 될 숫자(바로 더하거나 뺴지 않음)
             int curop = 1; // 현재 연산자
 
-            for (int j = 0; j < ; j++) {
-
+            // 맨마지막 수 제외하고 연산자까지 처리
+            for (int j = 0; j < n - 1; j++) {
+                if (opers[j] == 0) curnum = curnum * 10 + j + 2;
+                else {
+                    if (curop == 1) res += curnum; // 덧셈인경우
+                    else res -= curnum;
+                    curnum = j + 2;
+                    curop = opers[j];
+                }
             }
+
+            // 마지막 수까지 계산
+            if (curop == 1) res += curnum;
+            else res -= curnum;
+            if (res == T) return 1;
+            else return 0;
         }
+        return 0;
     }
 
 
