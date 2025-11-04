@@ -1,10 +1,7 @@
 package Lab03;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class ClassroomAssignment {
     public static void main(String[] args) throws IOException {
@@ -13,37 +10,32 @@ public class ClassroomAssignment {
         while (t-- > 0) {
             int n = Integer.parseInt(br.readLine());
             int[][] classTime = new int[n][2];
-            // classTime[start_time][end_time]
 
             StringTokenizer st = new StringTokenizer(br.readLine());
+            for (int i = 0; i < n; i++) classTime[i][0] = Integer.parseInt(st.nextToken()); // start
+            st = new StringTokenizer(br.readLine());
+            for (int i = 0; i < n; i++) classTime[i][1] = Integer.parseInt(st.nextToken()); // end
+
+            // 시작시간 기준 정렬
+            Arrays.sort(classTime, Comparator.comparingInt(a -> a[0]));
+
+            PriorityQueue<Integer> pq = new PriorityQueue<>(); // 끝시간 최소힙
+            int answer = 0;
+
             for (int i = 0; i < n; i++) {
-                classTime[i][0] = Integer.parseInt(st.nextToken());
-            }
-            st =  new StringTokenizer(br.readLine());
-            for (int i = 0; i < n; i++) {
-                classTime[i][1] = Integer.parseInt(st.nextToken());
+                int s = classTime[i][0], e = classTime[i][1];
+
+                // s 시각까지 끝난 모든 강의실 반납
+                while (!pq.isEmpty() && pq.peek() <= s) pq.poll();
+
+                // 현재 수업을 배정: 끝시간을 기록
+                pq.offer(e);
+
+                // 동시에 쓰이는 방 개수의 최댓값 갱신
+                if (pq.size() > answer) answer = pq.size();
             }
 
-            // end-time 기준 오름차순 정렬
-            Arrays.sort(classTime, (a, b) -> Integer.compare(a[0], b[0]));
-
-            int time = classTime[0][1]; // 첫 타임 end-time
-            int num = 1;
-            for (int i = 0; i < 2; i++) {
-                if (time <= classTime[i][1]) {
-                    time = classTime[i][2];
-                    num += 1;
-                }
-            }
-            System.out.println(num);
+            System.out.println(answer);
         }
     }
-
 }
-
-/**
- *
- * 강의별로 강의실 배정
- * 한 타임에 강의실이 겹치게 배정되면 안됨
- * 강의실을 최소 개수
- */
